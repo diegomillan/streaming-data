@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  ingest-api:
+    build:
+      context: API-ingest
+    command: bash -c 'uvicorn main:app --reload --host streaming.localhost'
+    volumes:
+      - ./API-ingest/app:/src/app:cached
+    networks:
+      default:
+        aliases:
+          - streaming.localhost
+    ports:
+      - 8000:8000
